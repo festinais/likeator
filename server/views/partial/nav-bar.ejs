@@ -12,11 +12,16 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li ><a data-toggle="modal" data-target="#modalRegisterForm" href="#">Profile</a></li>
+                <li ><a data-toggle="modal" class="logged-in" data-target="#modalRegisterForm" href="#">Profile</a></li>
             </ul>
-            <ul class="nav navbar-nav pull-right">
+
+            <ul class="nav navbar-nav pull-right logged-out">
                 <li ><a data-toggle="modal" data-target="#modalRegisterForm" href="#">Sign up</a></li>
-                <li ><a  href="#">Log in</a></li>
+                <li ><a data-toggle="modal" data-target="#modalLoginForm" href="#">Log in</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav pull-right logged-in">
+                <li ><a data-toggle="modal" data-target="#modalUpdatePasswordForm" href="#">Update Password</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

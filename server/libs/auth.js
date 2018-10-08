@@ -1,6 +1,6 @@
 const
     jwt = require('jsonwebtoken'),
-    config = require('../../config');
+    config = require('../../config/default');
 
 module.exports.createToken = async function(userId) {
 
@@ -11,9 +11,11 @@ module.exports.createToken = async function(userId) {
     return token;
 };
 
-module.exports.verifyToken = async function(res, token, callback) {
+module.exports.verifyToken = async function(req, res, next) {
+    const token = req.headers['token'];
+
     if (!token)
-        return res.status(401).json(
+        return res.status(403).json(
             {
                 auth: false,
                 message: 'No token provided.'
@@ -27,6 +29,6 @@ module.exports.verifyToken = async function(res, token, callback) {
                     message: 'Failed to authenticate token.'
                 });
 
-        callback();
+        next();
     });
 };

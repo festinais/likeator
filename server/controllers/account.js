@@ -20,7 +20,10 @@ module.exports.userSignUp = async function (req, res) {
         const token = await auth.createToken(user._id);
 
         res.status(200).json({
-            token: token,
+            data : {
+              email : user.email,
+              token : token
+            },
             auth: true
         });
     });
@@ -31,47 +34,46 @@ module.exports.userLogin = async function (req, res) {
         email : req.body.email
     };
 
-    await findUserByEmail(req, res, email, async function(userId) {
+    await findUserByEmail(req, res, email, async function(user) {
 
-        const token = await auth.createToken(userId);
+        const token = await auth.createToken(user._id);
 
         res.status(200).json({
             message: "User is found!",
-            token: token,
+            data : {
+                email : user.email,
+                token : token
+            },
             auth: true
         });
     });
 }
 
 module.exports.userUpdatePassword = async function (req, res) {
-    const token = req.headers['token'];
+    const email = {
+        email : req.body.email
+    };
+    const newPassword = req.body.newPassword;
 
-    await auth.verifyToken(res, token, async function() {
-        const email = {
-            email : req.body.email
-        };
-        const newPassword = req.body.newPassword;
+    await findUserByEmail(req, res, email, async function(user) {
+        const hashedNewPassword = bcrypt.hashSync(newPassword, 8);
 
-        await findUserByEmail(req, res, email, async function(userId) {
-            const hashedNewPassword = bcrypt.hashSync(newPassword, 8);
-
-            UserModel.update(
-                { "_id": userId },
-                { "$set": { "password": hashedNewPassword } },
-                function (err, user) {
-                    if (err)
-                        res.status(500).json({
-                            message: err,
-                            auth: true
-                        });
-
-                    res.status(200).json({
-                        message: "Password updated!",
+        UserModel.update(
+            { "_id": user._id },
+            { "$set": { "password": hashedNewPassword } },
+            function (err, user) {
+                if (err)
+                    res.status(500).json({
+                        message: err,
                         auth: true
                     });
-                }
-            );
-        });
+
+                res.status(200).json({
+                    message: "Password updated!",
+                    auth: true
+                });
+            }
+        );
     });
 }
 
@@ -85,7 +87,7 @@ findUserByEmail = async function(req, res, email, callback) {
         if (user !== null) {
             if (bcrypt.compareSync(req.body.password, user.password)) {
 
-                return callback(user._id);
+                return callback(user);
             } else {
                 res.status(400).json({
                     message: "Password incorrect!"
