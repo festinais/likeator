@@ -1,0 +1,41 @@
+<html>
+<head>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="/script.js"></script>
+</head>
+<body>
+<!-- Nav bar block -->
+<% include ./partial/nav-bar.ejs %>
+
+
+<div class="container">
+
+    <div class="jumbotron" style="margin-top: 100px">
+        <h3>Welcome to Likeator</h3>
+        <p>Login to checkout world-wide user likectivity...</p>
+    </div>
+
+    <!-- Sign-up modal -->
+    <% include ./partial/sign-up.ejs %>
+</div><!-- /.container -->
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
