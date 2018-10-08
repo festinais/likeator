@@ -1,17 +1,17 @@
 
 # likeator
-Just a simple application where the user can register/login and like other users.
+Just a simple application where the user can register/login and like/unlike other users.
 
-##Prerequisites
+#Prerequisites
 To run this application you need to have installed the following technologies:
 - Node v8
 - MongoDB
 
-##Instalation
+#Instalation
 ```
 npm install
 ```
-##Run application
+#Run application
 
 ```
 node app.js
