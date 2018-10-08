@@ -13,7 +13,6 @@ $(document).on('click','.update-password',function() {
 });
 
 function updatePassword() {
-    debugger;
     var newPassword = $("#newPassword").val();
     var verifyNewPassword = $("#verifyNewPassword").val();
 
@@ -79,7 +78,6 @@ function signUp() {
         url: "/signup",
         contentType: "application/json; charset=utf-8",
         success: function (res) {
-            debugger;
             window.localStorage.setItem(USER_KEY, JSON.stringify(res.data));
             window.location.reload();
         },

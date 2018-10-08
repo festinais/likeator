@@ -1,8 +1,14 @@
 
 const
     UserModel = require('../db-utils/user-schema'),
-    UserActivityModel = require('../db-utils/user-activity-schema'),
-    auth = require('../libs/auth');
+    UserActivityModel = require('../db-utils/user-activity-schema');
+
+
+
+
+module.exports.mostLiked = async function (req, res) {
+    await toggleLike(req, res, 'LIKE');
+};
 
 
 module.exports.likeUser = async function (req, res) {
