@@ -3,11 +3,12 @@ const
     UserModel = require('../db-utils/user-schema'),
     ActivityModel = require('../db-utils/user-activity-schema');
 
-const toggleLikeAction = async function (userId, body) {
+const toggleLikeAction = async function (committedBy, affectedUserId, body) {
 
     return await ActivityModel.updateOne(
         {
-            affectedUserId : userId
+            committedBy : committedBy,
+            affectedUserId : affectedUserId
         },
         {
             $set: body
@@ -70,13 +71,13 @@ module.exports.likeActionHandler = async function (req, res) {
         committedBy: req.body.committedBy
     };
 
-    let result = await toggleLikeAction(id, body);
+    let result = await toggleLikeAction(req.body.committedBy, id, body);
     res.send(result)
 };
 
 module.exports.getUser = async function(req, res) {
     let {id} = req.params;
-    let foundUser = await UserModel.findOne({_id: id});
+    let foundUser = await UserModel.findOne({affectedUserId: id});
 
     let count = await ActivityModel.find({
         affectedUserEmail : foundUser.email

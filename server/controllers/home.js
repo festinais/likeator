@@ -11,8 +11,3 @@ module.exports.users = async function (req, res) {
     res.render(__dirname + '/../views/users.html');
 };
 
-// module.exports.mostLiked = async function (req, res) {
-//     res.render(__dirname + '/../views/.html');
-// };
-
-

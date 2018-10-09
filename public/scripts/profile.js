@@ -72,6 +72,9 @@ function getUsers() {
         type: "GET",
         data: JSON.stringify(data),
         url: "/users?email=" + data.email,
+        headers: {
+            "token": JSON.parse(localStorage.getItem(USER_KEY)).token
+        },
         contentType: "application/json; charset=utf-8",
         success: function (res) {
             res.data.forEach( function(obj) {

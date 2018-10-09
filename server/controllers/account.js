@@ -27,11 +27,11 @@ module.exports.userSignUp = async function (req, res) {
 }
 
 module.exports.userLogin = async function (req, res) {
-    const email = {
+    const query = {
         email : req.body.email
     };
 
-    await findUserByEmail(req, res, email, async function(user) {
+    await findUserByEmail(req, res, query, async function(user) {
 
         const token = await auth.createToken(user._id);
 
@@ -74,27 +74,22 @@ module.exports.userUpdatePassword = async function (req, res) {
     });
 }
 
-findUserByEmail = async function(req, res, email, callback) {
-    await UserModel.findOne(email, async function(err, user) {
-        if(err)
-            return res.status(500).json({
-                message: err
-            });
+findUserByEmail = async function(req, res, query, callback) {
+    const user =  await UserModel.findOne(query);
 
-        if (user !== null) {
-            if (bcrypt.compareSync(req.body.password, user.password)) {
+    if (user !== null) {
+        if (bcrypt.compareSync(req.body.password, user.password)) {
 
-                return callback(user);
-            } else {
-                res.status(400).json({
-                    message: "Password incorrect!"
-                });
-            }
-
+            return callback(user);
         } else {
             res.status(400).json({
-                message: "Email not found!"
+                message: "Password incorrect!"
             });
         }
-    });
+
+    } else {
+        res.status(400).json({
+            message: "Email not found!"
+        });
+    }
 }
