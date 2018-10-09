@@ -31,7 +31,7 @@ module.exports.userLogin = async function (req, res) {
         email : req.body.email
     };
 
-    await findUserByEmail(req, res, query, async function(user) {
+    await findUserByEmailAndCheckPass(req, res, query, async function(user) {
 
         const token = await auth.createToken(user._id);
 
@@ -52,7 +52,7 @@ module.exports.userUpdatePassword = async function (req, res) {
     };
     const newPassword = req.body.newPassword;
 
-    await findUserByEmail(req, res, email, async function(user) {
+    await findUserByEmailAndCheckPass(req, res, email, async function(user) {
         const hashedNewPassword = bcrypt.hashSync(newPassword, 8);
 
         UserModel.update(
@@ -74,7 +74,7 @@ module.exports.userUpdatePassword = async function (req, res) {
     });
 }
 
-findUserByEmail = async function(req, res, query, callback) {
+findUserByEmailAndCheckPass = async function(req, res, query, callback) {
     const user =  await UserModel.findOne(query);
 
     if (user !== null) {
