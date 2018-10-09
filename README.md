@@ -16,3 +16,10 @@ npm install
 ```
 node server.js
 ```
+
+# Run tests
+
+```
+npm test
+```
+

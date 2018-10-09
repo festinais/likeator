@@ -1,5 +1,10 @@
+var USER_KEY = "loggedUser";
 
 $(document).ready(function() {
+    if(!(JSON.parse(localStorage.getItem(USER_KEY)))) {
+        alert("Please log in first!");
+        return false;
+    }
     getProfile();
     getUsers();
     toggleLike();
