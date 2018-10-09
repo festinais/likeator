@@ -24,7 +24,7 @@ router.get('/users', profile.usersList);
 //user actions routes
 router.post('/user/:id/like', auth.verifyToken, userActions.likeActionHandler);
 router.post('/user/:id/unlike', auth.verifyToken, userActions.likeActionHandler);
-router.post('/user/:id', userActions.getUser);
+router.get('/user/:id', userActions.getUser);
 router.get('/most-liked', userActions.mostLiked);
 
 
