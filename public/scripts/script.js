@@ -34,7 +34,6 @@ function updatePassword() {
         },
         contentType: "application/json; charset=utf-8",
         success: function (res) {
-            window.localStorage.setItem(USER_KEY, res.data);
             window.location.reload();
         },
         error: function (res) {

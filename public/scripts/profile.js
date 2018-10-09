@@ -86,7 +86,7 @@ function getUsers() {
                 var action = obj.action === "unlike" ? "like" : "unlike";
 
                 $('.table tr:last').after(
-                    '<tr><td><a id="userInfo" href="/user/' +obj._id + '"' +'>' + obj.name + '</a></td><td>' + obj.email + '</td>' +
+                    '<tr><td><a target="_blank" href="/user/' +obj._id + '"' +'>' + obj.name + '</a></td><td>' + obj.email + '</td>' +
                     '<td><button class="btn btn-primary toggleLike" data-email="' + obj.email + '" data-name="' + obj.name + '" data-action="' + action + '" data-id="' + obj._id + '">' + action + '</button></td>' +
                     '</tr>');
             });

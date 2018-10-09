@@ -5,6 +5,7 @@ const
     auth = require('../middleware/auth');
 
 module.exports.userSignUp = async function (req, res) {
+
     const hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
     const userInfo = new UserModel({
@@ -39,6 +40,7 @@ module.exports.userLogin = async function (req, res) {
             message: "User is found!",
             data : {
                 email : user.email,
+                id : user._id,
                 token : token
             },
             auth: true

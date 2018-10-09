@@ -77,7 +77,7 @@ module.exports.likeActionHandler = async function (req, res) {
 
 module.exports.getUser = async function(req, res) {
     let {id} = req.params;
-    let foundUser = await UserModel.findOne({affectedUserId: id});
+    let foundUser = await UserModel.findOne({_id: id});
 
     let count = await ActivityModel.find({
         affectedUserEmail : foundUser.email
