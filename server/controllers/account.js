@@ -2,7 +2,7 @@
 const
     UserModel = require('../db-utils/user-schema'),
     bcrypt = require('bcryptjs'),
-    auth = require('../libs/auth');
+    auth = require('../middleware/auth');
 
 module.exports.userSignUp = async function (req, res) {
     const hashedPassword = bcrypt.hashSync(req.body.password, 8);
@@ -13,20 +13,17 @@ module.exports.userSignUp = async function (req, res) {
         password: hashedPassword
     });
 
-    await userInfo.save(async function(err, user) {
-        if (err)
-            return res.status(500).send(err);
+    let user = await userInfo.save();
+    const token = await auth.createToken(user._id);
 
-        const token = await auth.createToken(user._id);
-
-        res.status(200).json({
-            data : {
-              email : user.email,
-              token : token
-            },
-            auth: true
-        });
+    res.status(200).json({
+        data : {
+            email : user.email,
+            token : token
+        },
+        auth: true
     });
+
 }
 
 module.exports.userLogin = async function (req, res) {

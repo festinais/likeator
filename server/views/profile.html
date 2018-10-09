@@ -1,0 +1,37 @@
+<html>
+<% include ./partial/header.ejs %>
+<body>
+<!-- Nav bar block -->
+<% include ./partial/nav-bar.ejs %>
+
+
+<div class="container">
+
+    <div class="jumbotron" style="margin-top: 100px">
+
+        <div class="container">
+            <h2>Basic Info</h2>
+            <div class="panel panel-default">
+                <div class="panel-body" style="font-size:20px;">
+                    <div>Email: <h4><span id="myEmail"></span></h4> </div>
+                    <br>
+                    <div>Name: <h4><span id="myName"></span></h4></div>
+                    <br>
+                    <div>Number of likes: <h4><span id="myLikes"></span></h4> </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Sign-up modal -->
+    <% include ./partial/sign-up.ejs %>
+
+    <!-- Log-in modal -->
+    <% include ./partial/log-in.ejs %>
+
+    <% include ./partial/update-password.ejs %>
+</div><!-- /.container -->
+<script src="/scripts/profile.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 const
     jwt = require('jsonwebtoken'),
-    config = require('../../config/default');
+    config = require('../../config');
 
 module.exports.createToken = async function(userId) {
 

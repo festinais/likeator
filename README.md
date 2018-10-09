@@ -14,5 +14,5 @@ npm install
 # Run application
 
 ```
-node app.js
+node server.js
 ```

@@ -4,7 +4,9 @@ const
 
 
 const userActivitySchema = mongoose.Schema({
-    affectedUser: String,
+    affectedUserId: String,
+    affectedUserEmail: String,
+    affectedUserName: String,
     action: String,
     committedBy: String
 });

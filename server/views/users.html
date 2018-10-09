@@ -1,0 +1,32 @@
+<html>
+<% include ./partial/header.ejs %>
+<body>
+<!-- Nav bar block -->
+<% include ./partial/nav-bar.ejs %>
+
+
+<div class="container" style="margin-top:100px;">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <!-- Sign-up modal -->
+    <% include ./partial/sign-up.ejs %>
+
+    <!-- Log-in modal -->
+    <% include ./partial/log-in.ejs %>
+
+    <% include ./partial/update-password.ejs %>
+</div><!-- /.container -->
+<script src="/scripts/profile.js"></script>
+</body>
+</html>

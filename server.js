@@ -24,6 +24,13 @@ app.use(bodyParser.json());
 
 app.use('/', route);
 
-app.listen(port, () => {
-    console.log('We are live on ' + port);
-});
+
+
+if (!module.parent) {
+    // this is the main module
+    app.listen(port, () => {
+        console.log('We are live on ' + port);
+    });
+} else {
+    module.exports.server = app
+}
